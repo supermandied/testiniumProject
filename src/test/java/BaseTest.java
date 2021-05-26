@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
@@ -19,9 +20,7 @@ public class BaseTest {
 
     @BeforeAll
     public void setUp(){
-        System.out.println("Base Test");
-        System.setProperty("webdriver.chrome.driver","drivers/chromedriver");
-        driver = new ChromeDriver();
+        WebDriverManager.chromedriver().setup();
         driver.get("https://www.gittigidiyor.com/");
         wait = new WebDriverWait(driver, 15);
     }
