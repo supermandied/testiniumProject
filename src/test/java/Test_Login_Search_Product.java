@@ -60,8 +60,6 @@ public class Test_Login_Search_Product extends BaseTest{
         // Wait until page load
         Thread.sleep(2000);
 
-        click(By.id("buyitnow_adet"),0);
-        //burada aslında ürün sayısını 2 olarak eklemeyi düşündüm.
 
     }
 
@@ -99,15 +97,22 @@ public class Test_Login_Search_Product extends BaseTest{
     }
 
     @Test
-    @Order(6)
-    public void basket(){
+    @Order(7)
+    public void basketCountUp(){
         Log4j.info("The basket is opened");
         driver.get("https://www.gittigidiyor.com/sepetim");
 
         Log4j.info("Make product count in basket 2 ");
 
-        click(By.cssSelector("option[value='2']"),5);
+        click(By.cssSelector("option[value='2']"),3);
 
+
+    }
+
+
+    @Test
+    @Order(8)
+    public void basketClean(){
         Log4j.info("Clear the basket");
 
         click(By.cssSelector("a[title='Sil']"),5);
