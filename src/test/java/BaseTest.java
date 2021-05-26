@@ -1,32 +1,48 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BaseTest {
 
-    static WebDriverWait wait;
-    static WebDriver driver;
-    static ExpectedCondition<Boolean> documentReady = driver -> {
+     WebDriverWait wait;
+     WebDriver driver;
+     ExpectedCondition<Boolean> documentReady = driver -> {
         return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
     };
 
     @BeforeAll
     public void setUp(){
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
+
+        String baseUrl ="https://www.gittigidiyor.com/";
         WebDriverManager.chromedriver().setup();
-        driver.get("https://www.gittigidiyor.com/");
-        wait = new WebDriverWait(driver, 15);
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        driver.get(baseUrl);
+        //driver.manage().window().maximize();
+
     }
     @AfterAll
     public void testFinish(){
-        System.out.println("Base Test Finish");
+        System.out.println("Base Test Finish in 5 sec");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         driver.quit();
 
     }
@@ -40,7 +56,12 @@ public class BaseTest {
         driver.findElement(By.id(id)).click();
     }
 
-    public void getUrl(String URL) {
-        driver.get(URL);
+    public void click(By byElement, int timeOut) {
+        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        wait.until(ExpectedConditions.elementToBeClickable(byElement)).click();
     }
+
+//    public void getUrl(String URL) {
+//        driver.get(URL);
+//    }
 }
