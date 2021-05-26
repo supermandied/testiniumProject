@@ -21,8 +21,8 @@ public class Test_Login_Search_Product extends BaseTest{
     @Order(1)
     public void Login() throws InterruptedException {
         driver.get("https://www.gittigidiyor.com/uye-girisi");
-        setById("L-UserNameField", "bilaltas93@gmail.com");
-        setById("L-PasswordField", "79115031");
+        setById("L-UserNameField", "mzv31636@cuoly.com");
+        setById("L-PasswordField", "123456test");
         click(By.id("gg-login-enter"),0);
 
 
