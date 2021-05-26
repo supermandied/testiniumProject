@@ -11,9 +11,9 @@ import java.util.Random;
 
 public class Test_Login_Search_Product extends BaseTest{
 
-    private By lowProductPriceBy  = By.id("sp-price-lowPrice");
-    private By highProductPriceBy = By.id("sp-price-highPrice");
-    private By discountProductPriceBy = By.id("sp-price-discountPrice");
+    private By lowPrice  = By.id("sp-price-lowPrice");
+    private By highPrice = By.id("sp-price-highPrice");
+    private By discountPrice = By.id("sp-price-discountPrice");
     private By productQuantity = By.id("buyitnow_adet");
 
 
@@ -58,7 +58,7 @@ public class Test_Login_Search_Product extends BaseTest{
         productElement.findElement(By.cssSelector("a")).click();
 
         // Wait until page load
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
 
     }
@@ -81,16 +81,16 @@ public class Test_Login_Search_Product extends BaseTest{
     @Order(6)
     public void productPrice(){
         Log4j.info("The final product price is below (discount check)");
-        driver.findElement(discountProductPriceBy).getText();
-        if (!driver.findElement(discountProductPriceBy).getText().isEmpty()) {
-            Log4j.info("Price is "+driver.findElement(discountProductPriceBy).getText());
+        driver.findElement(discountPrice).getText();
+        if (!driver.findElement(discountPrice).getText().isEmpty()) {
+            Log4j.info("Price is "+driver.findElement(discountPrice).getText());
         }
         else{
-            if(!driver.findElement(lowProductPriceBy).getText().isEmpty()){
-                Log4j.info("Price is "+lowProductPriceBy);
+            if(!driver.findElement(lowPrice).getText().isEmpty()){
+                Log4j.info("Price is "+lowPrice);
             }
             else
-                Log4j.info("Price is "+highProductPriceBy);
+                Log4j.info("Price is "+highPrice);
 
         }
 
