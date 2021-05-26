@@ -97,4 +97,20 @@ public class Test_Login_Search_Product extends BaseTest{
         }
 
     }
+
+    @Test
+    @Order(6)
+    public void basket(){
+        Log4j.info("The basket is opened");
+        driver.get("https://www.gittigidiyor.com/sepetim");
+
+        Log4j.info("Make product count in basket 2 ");
+
+        click(By.cssSelector("option[value='2']"),5);
+
+        Log4j.info("Clear the basket");
+
+        click(By.cssSelector("a[title='Sil']"),5);
+
+    }
 }
