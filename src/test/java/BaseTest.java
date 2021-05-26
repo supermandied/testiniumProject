@@ -23,6 +23,7 @@ public class BaseTest {
 
     @BeforeAll
     public void setUp(){
+        Log4j.info("Base Test is initialized");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
 
@@ -37,7 +38,7 @@ public class BaseTest {
     }
     @AfterAll
     public void testFinish(){
-        System.out.println("Base Test Finish in 5 sec");
+        Log4j.info("Base Test Finish in 5 sec...");
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
